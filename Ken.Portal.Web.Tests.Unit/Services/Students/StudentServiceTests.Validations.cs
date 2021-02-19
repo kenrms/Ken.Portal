@@ -120,7 +120,7 @@ namespace Ken.Portal.Web.Tests.Unit.Services.Students
         [InlineData(null)]
         [InlineData("")]
         [InlineData("   ")]
-        public async Task ShouldThrowValidationExceptionOnRegisterIfStudentIdntityIsInvalidAndLogItAsync(
+        public async Task ShouldThrowValidationExceptionOnRegisterIfStudentIdentityIsInvalidAndLogItAsync(
             string invalidIdentity)
         {
             // given
