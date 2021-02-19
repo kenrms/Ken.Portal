@@ -1,7 +1,6 @@
 ﻿using Ken.Portal.Web.Brokers.API;
 using Ken.Portal.Web.Brokers.Logging;
 using Ken.Portal.Web.Models.Students;
-using System;
 using System.Threading.Tasks;
 
 namespace Ken.Portal.Web.Services.Students
@@ -17,9 +16,7 @@ namespace Ken.Portal.Web.Services.Students
             this.loggingBroker = loggingBroker;
         }
 
-        public ValueTask<Student> RegisterStudentAsync(Student student)
-        {
-            throw new NotImplementedException();
-        }
+        public async ValueTask<Student> RegisterStudentAsync(Student student) =>
+            await this.apiBroker.PostStudentAsync(student);
     }
 }
