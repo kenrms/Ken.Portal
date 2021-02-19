@@ -19,6 +19,10 @@ namespace Ken.Portal.Web.Services.Students
             {
                 throw CreateAndLogValidationException(nullStudentException);
             }
+            catch (InvalidStudentException invalidStudentException)
+            {
+                throw CreateAndLogValidationException(invalidStudentException);
+            }
         }
 
         private StudentValidationException CreateAndLogValidationException(Exception exception)
