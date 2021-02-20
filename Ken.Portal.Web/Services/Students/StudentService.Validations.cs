@@ -38,6 +38,11 @@ namespace Ken.Portal.Web.Services.Students
                         parameterName: nameof(Student.BirthDate),
                         parameterValue: student.BirthDate);
 
+                case { } when IsInvalid(student.CreatedDate):
+                    throw new InvalidStudentException(
+                        parameterName: nameof(Student.CreatedDate),
+                        parameterValue: student.CreatedDate);
+
                 case { } when IsInvalid(student.CreatedBy):
                     throw new InvalidStudentException(
                         parameterName: nameof(Student.CreatedBy),
