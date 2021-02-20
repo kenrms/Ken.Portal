@@ -43,6 +43,11 @@ namespace Ken.Portal.Web.Services.Students
                         parameterName: nameof(Student.CreatedDate),
                         parameterValue: student.CreatedDate);
 
+                case { } when IsInvalid(student.UpdatedDate):
+                    throw new InvalidStudentException(
+                        parameterName: nameof(Student.UpdatedDate),
+                        parameterValue: student.UpdatedDate);
+
                 case { } when IsInvalid(student.CreatedBy):
                     throw new InvalidStudentException(
                         parameterName: nameof(Student.CreatedBy),
