@@ -27,6 +27,11 @@ namespace Ken.Portal.Web.Services.Students
                     throw new InvalidStudentException(
                         parameterName: nameof(Student.IdentityNumber),
                         parameterValue: student.IdentityNumber);
+
+                case { } when IsInvalid(student.FirstName):
+                    throw new InvalidStudentException(
+                        parameterName: nameof(Student.FirstName),
+                        parameterValue: student.FirstName);
             }
         }
 
