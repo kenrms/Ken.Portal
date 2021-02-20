@@ -161,12 +161,12 @@ namespace Ken.Portal.Web.Tests.Unit.Services.Students
         [InlineData("")]
         [InlineData("   ")]
         public async Task ShouldThrowValidationExceptionOnRegisterIfStudentFirstNameIsInvalidAndLogItAsync(
-            string firstName)
+            string invalidFirstName)
         {
             // given
             Student randomStudent = CreateRandomStudent();
             Student invalidStudent = randomStudent;
-            invalidStudent.FirstName = firstName;
+            invalidStudent.FirstName = invalidFirstName;
 
             var invalidStudentException = new InvalidStudentException(
                 parameterName: nameof(Student.FirstName),
