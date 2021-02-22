@@ -74,7 +74,7 @@ namespace Ken.Portal.Web.Tests.Unit.Services.Students
             var exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
 
-            var httpResponseUrlNotFoundException = 
+            var httpResponseUrlNotFoundException =
                 new HttpResponseUrlNotFoundException(
                     responseMessage: responseMessage,
                     message: exceptionMessage);
@@ -137,7 +137,7 @@ namespace Ken.Portal.Web.Tests.Unit.Services.Students
             var exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
 
-            var httpResponseInternalServerErrorException = 
+            var httpResponseInternalServerErrorException =
                 new HttpResponseInternalServerErrorException(
                     responseMessage: responseMessage,
                     message: exceptionMessage);

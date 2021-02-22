@@ -40,6 +40,10 @@ namespace Ken.Portal.Web.Services.Students
             {
                 throw CreateAndLogDependencyValidationException(httpResponseConflictException);
             }
+            catch (HttpResponseInternalServerErrorException httpResponseInternalServerErrorException)
+            {
+                throw CreateAndLogDependencyException(httpResponseInternalServerErrorException);
+            }
         }
 
         private StudentValidationException CreateAndLogValidationException(Exception exception)
@@ -66,6 +70,16 @@ namespace Ken.Portal.Web.Services.Students
                 new StudentDependencyException(exception);
 
             this.loggingBroker.LogCritical(studentDependencyException);
+
+            return studentDependencyException;
+        }
+
+        private StudentDependencyException CreateAndLogDependencyException(Exception exception)
+        {
+            var studentDependencyException =
+                new StudentDependencyException(exception);
+
+            this.loggingBroker.LogError(studentDependencyException);
 
             return studentDependencyException;
         }
