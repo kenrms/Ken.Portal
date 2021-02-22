@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Ken.Portal.Web.Models.ContainerComponents;
+using Ken.Portal.Web.Models.StudentViews;
 using Ken.Portal.Web.Views.Components;
 using Xunit;
 
@@ -74,11 +75,14 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown
                 .Should().NotBeNull();
 
-            this.renderedStudentRegistrationComponent.Instance.SubmitButton.Label
-                .Should().Be(expectedSubmitButtonLabel);
+            this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.Value
+                .Should().BeOfType(typeof(StudentViewGender));
 
             this.renderedStudentRegistrationComponent.Instance.SubmitButton
                 .Should().NotBeNull();
+
+            this.renderedStudentRegistrationComponent.Instance.SubmitButton.Label
+                .Should().Be(expectedSubmitButtonLabel);
 
             this.renderedStudentRegistrationComponent.Instance.StudentView.Should().BeNull();
             this.renderedStudentRegistrationComponent.Instance.Exception.Should().BeNull();
