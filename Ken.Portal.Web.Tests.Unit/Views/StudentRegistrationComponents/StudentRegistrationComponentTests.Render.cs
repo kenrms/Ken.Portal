@@ -23,7 +23,28 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             initialStudentRegistrationComponent.StudentFirstNameTextBox.Should().BeNull();
             initialStudentRegistrationComponent.StudentMiddleNameTextBox.Should().BeNull();
             initialStudentRegistrationComponent.StudentLastNameTextBox.Should().BeNull();
+            initialStudentRegistrationComponent.SubmitButton.Should().BeNull();
             initialStudentRegistrationComponent.StudentView.Should().BeNull();
+        }
+
+        [Fact]
+        public void ShouldRenderComponent()
+        {
+            // given
+            ComponentState expectedComponentState = ComponentState.Content;
+            string expectedIdentityTextBoxPlaceHolder = "Student Identity";
+            string expectedFirstNameTextBoxPlaceHolder = "First Name";
+            string expectedMiddleNameTextBoxPlaceHolder = "Middle Name";
+            string expectedLastNameTextBoxPlaceHolder = "Last Name";
+            string expectedSubmitButtonLabel = "Submit Student";
+
+            // when
+            this.renderedStudentRegistrationComponent =
+                RenderComponent<StudentRegistrationComponent>();
+
+            // then
+            this.renderedStudentRegistrationComponent.Instance.State
+                .Should().Be(expectedComponentState);
         }
     }
 }
