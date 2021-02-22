@@ -45,6 +45,9 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             // then
             this.renderedStudentRegistrationComponent.Instance.State
                 .Should().Be(expectedComponentState);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox
+                .Should().NotBeNull();
         }
     }
 }
