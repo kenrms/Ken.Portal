@@ -32,10 +32,10 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
         {
             // given
             ComponentState expectedComponentState = ComponentState.Content;
-            string expectedIdentityTextBoxPlaceHolder = "Student Identity";
-            string expectedFirstNameTextBoxPlaceHolder = "First Name";
-            string expectedMiddleNameTextBoxPlaceHolder = "Middle Name";
-            string expectedLastNameTextBoxPlaceHolder = "Last Name";
+            string expectedIdentityTextBoxPlaceholder = "Student Identity";
+            string expectedFirstNameTextBoxPlaceholder = "First Name";
+            string expectedMiddleNameTextBoxPlaceholder = "Middle Name";
+            string expectedLastNameTextBoxPlaceholder = "Last Name";
             string expectedSubmitButtonLabel = "Submit Student";
 
             // when
@@ -49,8 +49,34 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox
                 .Should().NotBeNull();
 
-            this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.PlaceHolder
-                .Should().Be(expectedIdentityTextBoxPlaceHolder);
+            this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.Placeholder
+                .Should().Be(expectedIdentityTextBoxPlaceholder);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox
+                .Should().NotBeNull();
+
+            this.renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox.Placeholder
+                .Should().Be(expectedFirstNameTextBoxPlaceholder);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox
+                .Should().NotBeNull();
+
+            this.renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox.Placeholder
+                .Should().Be(expectedMiddleNameTextBoxPlaceholder);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox
+                .Should().NotBeNull();
+
+            this.renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.Placeholder
+                .Should().Be(expectedLastNameTextBoxPlaceholder);
+
+            this.renderedStudentRegistrationComponent.Instance.SubmitButton
+                .Should().NotBeNull();
+
+            this.renderedStudentRegistrationComponent.Instance.SubmitButton.Label
+                .Should().Be(expectedSubmitButtonLabel);
+
+            this.studentViewServiceMock.VerifyNoOtherCalls();
         }
     }
 }

@@ -8,6 +8,6 @@ namespace Ken.Portal.Web.Views.Bases
         public string Value { get; set; }
 
         [Parameter]
-        public string PlaceHolder { get; set; }
+        public string Placeholder { get; set; }
     }
 }
