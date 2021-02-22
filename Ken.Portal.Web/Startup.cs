@@ -1,6 +1,10 @@
 using Ken.Portal.Web.Brokers.API;
+using Ken.Portal.Web.Brokers.DateTimes;
 using Ken.Portal.Web.Brokers.Logging;
 using Ken.Portal.Web.Models.Configurations;
+using Ken.Portal.Web.Services.Students;
+using Ken.Portal.Web.Services.StudentViews;
+using Ken.Portal.Web.Services.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,6 +34,10 @@ namespace Ken.Portal.Web
             services.AddScoped<IApiBroker, ApiBroker>();
             services.AddScoped<ILogger, Logger<LoggingBroker>>();
             services.AddScoped<ILoggingBroker, LoggingBroker>();
+            services.AddScoped<IDateTimeBroker, DateTimeBroker>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IStudentViewService, StudentViewService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

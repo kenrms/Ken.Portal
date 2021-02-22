@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ken.Portal.Web", "Ken.Portal.Web\Ken.Portal.Web.csproj", "{C4056206-FC6A-4ED8-A5D8-B8F8507B12F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ken.Portal.Web", "Ken.Portal.Web\Ken.Portal.Web.csproj", "{C4056206-FC6A-4ED8-A5D8-B8F8507B12F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ken.Portal.Web.Tests.Unit", "Ken.Portal.Web.Tests.Unit\Ken.Portal.Web.Tests.Unit.csproj", "{E379463A-CFF2-44E4-A1FC-9A346757A0A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ken.Portal.Web.Tests.Unit", "Ken.Portal.Web.Tests.Unit\Ken.Portal.Web.Tests.Unit.csproj", "{E379463A-CFF2-44E4-A1FC-9A346757A0A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
