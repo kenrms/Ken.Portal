@@ -153,7 +153,7 @@ namespace Ken.Portal.Web.Tests.Unit.Services.Students
 
         [Theory]
         [MemberData(nameof(DependencyApiExceptions))]
-        public async Task ShouldThrowDependencyExceptionOnRegisterIfServerInternalErrorOccursAndLogItAsync(
+        public async Task ShouldThrowDependencyExceptionOnRegisterIfDependencyApiErrorOccursAndLogItAsync(
             Exception dependencyApiException)
         {
             // given
