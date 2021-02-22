@@ -25,7 +25,7 @@ namespace Ken.Portal.Web.Tests.Unit.Services.Students
             var expectedDependencyValidationException =
                 new StudentDependencyValidationException(
                     httpResponseBadRequestException);
-            
+
             this.apiBrokerMock.Setup(broker =>
                 broker.PostStudentAsync(It.IsAny<Student>()))
                     .ThrowsAsync(httpResponseBadRequestException);
@@ -49,6 +49,48 @@ namespace Ken.Portal.Web.Tests.Unit.Services.Students
 
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public async Task ShouldThrowCriticalDependencyExceptionOnRegisterIfUrlNotFoundErrorOccursAndLogItAsync()
+        {
+            // given
+            Student someStudent = CreateRandomStudent();
+            var exceptionMessage = GetRandomString();
+            var responseMessage = new HttpResponseMessage();
+
+            var httpResponseUrlNotFoundException = new HttpResponseUrlNotFoundException(
+                responseMessage: responseMessage,
+                message: exceptionMessage);
+
+            var expectedDependencyException =
+                new StudentDependencyException(
+                    httpResponseUrlNotFoundException);
+
+            this.apiBrokerMock.Setup(broker =>
+                broker.PostStudentAsync(It.IsAny<Student>()))
+                    .ThrowsAsync(httpResponseUrlNotFoundException);
+
+            // when
+            ValueTask<Student> registerStudentTask =
+                this.studentService.RegisterStudentAsync(someStudent);
+
+            // then
+            await Assert.ThrowsAsync<StudentDependencyException>(() =>
+                registerStudentTask.AsTask());
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.PostStudentAsync(It.IsAny<Student>()),
+                Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogCritical(It.Is(
+                    SameExceptionAs(expectedDependencyException))),
+                    Times.Once);
+
+            this.apiBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+
         }
     }
 }
