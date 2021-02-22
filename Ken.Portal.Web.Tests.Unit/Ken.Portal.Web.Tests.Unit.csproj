@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="bunit" Version="1.0.0-preview-01" />
+    <PackageReference Include="CompareNETObjects" Version="4.72.0" />
     <PackageReference Include="FluentAssertions" Version="6.0.0-alpha0002" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.0-preview-20210127-04" />
     <PackageReference Include="Moq" Version="4.16.0" />

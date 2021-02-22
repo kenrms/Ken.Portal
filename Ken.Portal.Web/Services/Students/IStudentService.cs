@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Ken.Portal.Web.Services.Students
 {
-    interface IStudentService
+    public interface IStudentService
     {
         ValueTask<Student> RegisterStudentAsync(Student student);
     }
