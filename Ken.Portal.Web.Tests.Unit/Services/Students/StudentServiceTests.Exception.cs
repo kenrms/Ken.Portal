@@ -24,7 +24,7 @@ namespace Ken.Portal.Web.Tests.Unit.Services.Students
 
             var expectedDependencyValidationException =
                 new StudentDependencyValidationException(
-                    httpResponseBadRequestException.InnerException);
+                    httpResponseBadRequestException);
             
             this.apiBrokerMock.Setup(broker =>
                 broker.PostStudentAsync(It.IsAny<Student>()))

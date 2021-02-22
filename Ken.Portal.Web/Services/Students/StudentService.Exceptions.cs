@@ -1,5 +1,6 @@
 ﻿using Ken.Portal.Web.Models.Students;
 using Ken.Portal.Web.Models.Students.Exceptions;
+using RESTFulSense.Exceptions;
 using System;
 using System.Threading.Tasks;
 
@@ -23,6 +24,10 @@ namespace Ken.Portal.Web.Services.Students
             {
                 throw CreateAndLogValidationException(invalidStudentException);
             }
+            catch (HttpResponseBadRequestException httpResponseBadRequestException)
+            {
+                throw CreateAndLogDependencyValidationException(httpResponseBadRequestException);
+            }
         }
 
         private StudentValidationException CreateAndLogValidationException(Exception exception)
@@ -31,6 +36,16 @@ namespace Ken.Portal.Web.Services.Students
             this.loggingBroker.LogError(studentValidationException);
 
             return studentValidationException;
+        }
+
+        private StudentDependencyValidationException CreateAndLogDependencyValidationException(Exception exception)
+        {
+            var studentDependencyValidationException =
+                new StudentDependencyValidationException(exception);
+
+            this.loggingBroker.LogError(studentDependencyValidationException);
+
+            return studentDependencyValidationException;
         }
     }
 }
