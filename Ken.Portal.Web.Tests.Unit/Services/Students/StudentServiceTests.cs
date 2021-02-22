@@ -34,6 +34,8 @@ namespace Ken.Portal.Web.Tests.Unit.Services.Students
         private static Student CreateRandomStudent() =>
             CreateStudentFiller().Create();
 
+        private static string GetRandomString() => new MnemonicString().GetValue();
+
         private static Filler<Student> CreateStudentFiller()
         {
             var filler = new Filler<Student>();
