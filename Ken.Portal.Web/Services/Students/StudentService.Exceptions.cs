@@ -36,6 +36,10 @@ namespace Ken.Portal.Web.Services.Students
             {
                 throw CreateAndLogDependencyValidationException(httpResponseBadRequestException);
             }
+            catch (HttpResponseConflictException httpResponseConflictException)
+            {
+                throw CreateAndLogDependencyValidationException(httpResponseConflictException);
+            }
         }
 
         private StudentValidationException CreateAndLogValidationException(Exception exception)
