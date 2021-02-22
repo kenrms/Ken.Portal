@@ -71,11 +71,14 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.Placeholder
                 .Should().Be(expectedLastNameTextBoxPlaceholder);
 
-            this.renderedStudentRegistrationComponent.Instance.SubmitButton
+            this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown
                 .Should().NotBeNull();
 
             this.renderedStudentRegistrationComponent.Instance.SubmitButton.Label
                 .Should().Be(expectedSubmitButtonLabel);
+
+            this.renderedStudentRegistrationComponent.Instance.SubmitButton
+                .Should().NotBeNull();
 
             this.renderedStudentRegistrationComponent.Instance.StudentView.Should().BeNull();
             this.renderedStudentRegistrationComponent.Instance.Exception.Should().BeNull();
