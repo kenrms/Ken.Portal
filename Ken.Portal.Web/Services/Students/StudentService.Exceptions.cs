@@ -48,6 +48,10 @@ namespace Ken.Portal.Web.Services.Students
             {
                 throw CreateAndLogDependencyException(httpResponseException);
             }
+            catch (Exception serviceException)
+            {
+                throw CreateAndLogStudentServiceException(serviceException);
+            }
         }
 
         private StudentValidationException CreateAndLogValidationException(Exception exception)
@@ -86,6 +90,16 @@ namespace Ken.Portal.Web.Services.Students
             this.loggingBroker.LogError(studentDependencyException);
 
             return studentDependencyException;
+        }
+
+        private StudentServiceException CreateAndLogStudentServiceException(Exception exception)
+        {
+            var studentServiceException =
+                new StudentServiceException(exception);
+
+            this.loggingBroker.LogError(studentServiceException);
+
+            return studentServiceException;
         }
     }
 }
