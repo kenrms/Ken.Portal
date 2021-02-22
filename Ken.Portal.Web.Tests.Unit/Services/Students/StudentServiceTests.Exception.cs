@@ -11,11 +11,8 @@ namespace Ken.Portal.Web.Tests.Unit.Services.Students
 {
     public partial class StudentServiceTests
     {
-        [Fact]
-        public async Task ShouldThrowDependencyValidationExceptionOnRegisterIfBadRequestErrorOccursAndLogitAsync()
+        public static TheoryData ValidationApiExceptions()
         {
-            // given
-            Student someStudent = CreateRandomStudent();
             var exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
 
@@ -23,13 +20,33 @@ namespace Ken.Portal.Web.Tests.Unit.Services.Students
                 responseMessage: responseMessage,
                 message: exceptionMessage);
 
+            var httpResponseConflictException =
+                new HttpResponseConflictException(
+                    responseMessage: responseMessage,
+                    message: exceptionMessage);
+
+            return new TheoryData<Exception>
+            {
+                httpResponseBadRequestException,
+                httpResponseConflictException
+            };
+        }
+
+        [Theory]
+        [MemberData(nameof(ValidationApiExceptions))]
+        public async Task ShouldThrowDependencyValidationExceptionOnRegisterIfBadRequestErrorOccursAndLogitAsync(
+            Exception httpResponseValidationException)
+        {
+            // given
+            Student someStudent = CreateRandomStudent();
+
             var expectedDependencyValidationException =
                 new StudentDependencyValidationException(
-                    httpResponseBadRequestException);
+                    httpResponseValidationException);
 
             this.apiBrokerMock.Setup(broker =>
                 broker.PostStudentAsync(It.IsAny<Student>()))
-                    .ThrowsAsync(httpResponseBadRequestException);
+                    .ThrowsAsync(httpResponseValidationException);
 
             // when
             ValueTask<Student> registerStudentTask =
