@@ -23,6 +23,7 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             initialStudentRegistrationComponent.StudentFirstNameTextBox.Should().BeNull();
             initialStudentRegistrationComponent.StudentMiddleNameTextBox.Should().BeNull();
             initialStudentRegistrationComponent.StudentLastNameTextBox.Should().BeNull();
+            initialStudentRegistrationComponent.StudentGenderDropDown.Should().BeNull();
             initialStudentRegistrationComponent.SubmitButton.Should().BeNull();
             initialStudentRegistrationComponent.StudentView.Should().BeNull();
         }
