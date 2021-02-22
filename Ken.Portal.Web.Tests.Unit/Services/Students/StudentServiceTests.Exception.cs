@@ -2,6 +2,7 @@
 using Ken.Portal.Web.Models.Students.Exceptions;
 using Moq;
 using RESTFulSense.Exceptions;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
@@ -51,11 +52,8 @@ namespace Ken.Portal.Web.Tests.Unit.Services.Students
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
 
-        [Fact]
-        public async Task ShouldThrowCriticalDependencyExceptionOnRegisterIfUrlNotFoundErrorOccursAndLogItAsync()
+        public static TheoryData CriticalApiExceptions()
         {
-            // given
-            Student someStudent = CreateRandomStudent();
             var exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
 
@@ -63,13 +61,33 @@ namespace Ken.Portal.Web.Tests.Unit.Services.Students
                 responseMessage: responseMessage,
                 message: exceptionMessage);
 
+            var httpResponseUnauthorizedException =
+                new HttpResponseUnauthorizedException(
+                    responseMessage: responseMessage,
+                    message: exceptionMessage);
+
+            return new TheoryData<Exception>
+            {
+                httpResponseUrlNotFoundException,
+                httpResponseUnauthorizedException
+            };
+        }
+
+        [Theory]
+        [MemberData(nameof(CriticalApiExceptions))]
+        public async Task ShouldThrowCriticalDependencyExceptionOnRegisterIfUrlNotFoundErrorOccursAndLogItAsync(
+            Exception httpResponseCriticalException)
+        {
+            // given
+            Student someStudent = CreateRandomStudent();
+
             var expectedDependencyException =
                 new StudentDependencyException(
-                    httpResponseUrlNotFoundException);
+                    httpResponseCriticalException);
 
             this.apiBrokerMock.Setup(broker =>
                 broker.PostStudentAsync(It.IsAny<Student>()))
-                    .ThrowsAsync(httpResponseUrlNotFoundException);
+                    .ThrowsAsync(httpResponseCriticalException);
 
             // when
             ValueTask<Student> registerStudentTask =
