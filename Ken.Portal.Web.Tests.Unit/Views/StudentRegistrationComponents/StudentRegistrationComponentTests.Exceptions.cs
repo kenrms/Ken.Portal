@@ -12,7 +12,7 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
     {
         [Theory]
         [MemberData(nameof(StudentViewValidationExceptions))]
-        public void ShouldRenderInnerExceptionMessageIfValidationErrorOccured(
+        public void ShouldRenderInnerExceptionMessageIfValidationErrorOccurred(
             Exception studentViewValidationException)
         {
             // given
@@ -22,6 +22,34 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.studentViewServiceMock.Setup(service =>
                 service.AddStudentViewAsync(It.IsAny<StudentView>()))
                 .ThrowsAsync(studentViewValidationException);
+
+            // when
+            this.renderedStudentRegistrationComponent =
+                RenderComponent<StudentRegistrationComponent>();
+
+            this.renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
+
+            // then
+            this.renderedStudentRegistrationComponent.Instance.ErrorLabel.Value
+                .Should().BeEquivalentTo(expectedErrorMessage);
+
+            this.studentViewServiceMock.Verify(service =>
+                service.AddStudentViewAsync(It.IsAny<StudentView>()),
+                    Times.Once);
+        }
+
+        [Theory]
+        [MemberData(nameof(StudentViewDependencyServiceExceptions))]
+        public void ShouldRenderOuterExceptionMessageIfDependencyOrServiceErrorOccurred(
+            Exception studentViewDependencyServiceException)
+        {
+            // given
+            string expectedErrorMessage =
+                studentViewDependencyServiceException.Message;
+
+            this.studentViewServiceMock.Setup(service =>
+                service.AddStudentViewAsync(It.IsAny<StudentView>()))
+                .ThrowsAsync(studentViewDependencyServiceException);
 
             // when
             this.renderedStudentRegistrationComponent =

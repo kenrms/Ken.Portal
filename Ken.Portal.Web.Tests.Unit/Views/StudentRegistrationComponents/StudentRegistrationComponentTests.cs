@@ -29,7 +29,7 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
         private static string GetRandomString() =>
             new MnemonicString().GetValue();
 
-        public  static TheoryData StudentViewValidationExceptions()
+        public static TheoryData StudentViewValidationExceptions()
         {
             string randomMessage = GetRandomString();
             string validationMessage = GetRandomString();
@@ -40,6 +40,17 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             {
                 new StudentViewValidationException(innerValidationException),
                 new StudentViewDependencyValidationException(innerValidationException),
+            };
+        }
+
+        public static TheoryData StudentViewDependencyServiceExceptions()
+        {
+            var innerValidationException = new Exception();
+
+            return new TheoryData<Exception>
+            {
+                new StudentViewDependencyException(innerValidationException),
+                new StudentViewServiceException(innerValidationException),
             };
         }
 
