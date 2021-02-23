@@ -160,7 +160,10 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
                 .Should().Be(expectedStudentView.BirthDate);
 
             this.renderedStudentRegistrationComponent.Instance.StatusLabel.Value
-                .Should().BeNull();
+                .Should().Be("Submitted Successfully");
+
+            this.renderedStudentRegistrationComponent.Instance.StatusLabel.Color
+                .Should().Be(Color.Green);
 
             this.studentViewServiceMock.Verify(service =>
                 service.AddStudentViewAsync(this.renderedStudentRegistrationComponent.Instance.StudentView),
