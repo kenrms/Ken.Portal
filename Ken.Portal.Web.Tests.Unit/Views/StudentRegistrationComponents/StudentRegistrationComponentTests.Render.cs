@@ -5,6 +5,7 @@ using Ken.Portal.Web.Models.ContainerComponents;
 using Ken.Portal.Web.Models.StudentViews;
 using Ken.Portal.Web.Views.Components;
 using Moq;
+using System;
 using Xunit;
 
 namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
@@ -103,6 +104,36 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
 
             this.renderedStudentRegistrationComponent.Instance.Exception.Should().BeNull();
             this.studentViewServiceMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public void ShouldDisplaySubmittingStatusBeforeStudentIsSubmittedSuccessfully()
+        {
+            // given
+            StudentView someStudentView = CreateRandomStudentView();
+
+            this.studentViewServiceMock.Setup(service =>
+                service.AddStudentViewAsync(It.IsAny<StudentView>()))
+                    .ReturnsAsync(
+                        value: someStudentView, 
+                        delay: TimeSpan.FromMilliseconds(500));
+
+            // when
+            this.renderedStudentRegistrationComponent =
+                RenderComponent<StudentRegistrationComponent>();
+
+            this.renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
+
+            // then
+            this.renderedStudentRegistrationComponent.Instance.StatusLabel.Value
+                .Should().BeEquivalentTo("Submitting...");
+
+            this.renderedStudentRegistrationComponent.Instance.StatusLabel.Color
+                .Should().Be(Color.Black);
+
+            this.studentViewServiceMock.Verify(service =>
+                service.AddStudentViewAsync(It.IsAny<StudentView>()),
+                    Times.Once);
         }
 
         [Fact]

@@ -1,7 +1,6 @@
 ﻿@using Ken.Portal.Web.Views.Components.ContainerComponents;
 @using Ken.Portal.Web.Views.Bases;
 @using Ken.Portal.Web.Models.StudentViews;
-@using Ken.Portal.Web.Models.Colors;
 
 <ContainerComponent State="State">
     <Content>
@@ -23,17 +22,17 @@
                          Placeholder="Last Name" />
             <br />
             <DropDownBase @ref=StudentGenderDropDown
-                         @bind-Value="StudentView.Gender"
+                          @bind-Value="StudentView.Gender"
                           TEnum="StudentViewGender" />
             <br />
-            <DatePickerBase @ref=DateOfBirthPicker                             
-                         @bind-Value="StudentView.BirthDate"/>
+            <DatePickerBase @ref=DateOfBirthPicker
+                            @bind-Value="StudentView.BirthDate" />
             <br />
             <ButtonBase @ref=SubmitButton
                         OnClick="@RegisterStudentAsync"
                         Label="Submit Student" />
             <br />
-            <LabelBase @ref=StatusLabel" />
+            <LabelBase @ref=StatusLabel />
         </div>
     </Content>
 </ContainerComponent>
