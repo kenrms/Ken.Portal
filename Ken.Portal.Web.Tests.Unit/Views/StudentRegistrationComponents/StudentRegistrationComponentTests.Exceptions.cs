@@ -1,5 +1,6 @@
 ﻿using Bunit;
 using FluentAssertions;
+using Ken.Portal.Web.Models.Colors;
 using Ken.Portal.Web.Models.StudentViews;
 using Ken.Portal.Web.Views.Components;
 using Moq;
@@ -33,6 +34,9 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.StatusLabel.Value
                 .Should().BeEquivalentTo(expectedErrorMessage);
 
+            this.renderedStudentRegistrationComponent.Instance.StatusLabel.Color
+                .Should().Be(Color.Red);
+
             this.studentViewServiceMock.Verify(service =>
                 service.AddStudentViewAsync(It.IsAny<StudentView>()),
                     Times.Once);
@@ -60,6 +64,9 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             // then
             this.renderedStudentRegistrationComponent.Instance.StatusLabel.Value
                 .Should().BeEquivalentTo(expectedErrorMessage);
+
+            this.renderedStudentRegistrationComponent.Instance.StatusLabel.Color
+                .Should().Be(Color.Red);
 
             this.studentViewServiceMock.Verify(service =>
                 service.AddStudentViewAsync(It.IsAny<StudentView>()),

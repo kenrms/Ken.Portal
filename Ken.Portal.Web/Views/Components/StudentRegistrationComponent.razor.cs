@@ -1,4 +1,5 @@
-﻿using Ken.Portal.Web.Models.ContainerComponents;
+﻿using Ken.Portal.Web.Models.Colors;
+using Ken.Portal.Web.Models.ContainerComponents;
 using Ken.Portal.Web.Models.StudentViews;
 using Ken.Portal.Web.Models.StudentViews.Exceptions;
 using Ken.Portal.Web.Services.StudentViews;
@@ -35,35 +36,49 @@ namespace Ken.Portal.Web.Views.Components
             try
             {
                 await this.StudentViewService.AddStudentViewAsync(this.StudentView);
+                ReportStudentSubmissionSuccess();
             }
             catch (StudentViewValidationException studentViewValidationException)
             {
                 string validationMessage =
                     studentViewValidationException.InnerException.Message;
 
-                this.StatusLabel.SetValue(validationMessage);
+                ReportStudentSubmissionFailed(validationMessage);
             }
             catch (StudentViewDependencyValidationException dependencyValidationException)
             {
                 string validationMessage =
                     dependencyValidationException.InnerException.Message;
 
-                this.StatusLabel.SetValue(validationMessage);
+                ReportStudentSubmissionFailed(validationMessage);
             }
             catch (StudentViewDependencyException studentViewDependencyException)
             {
                 string validationMessage =
                     studentViewDependencyException.Message;
 
-                this.StatusLabel.SetValue(validationMessage);
+                ReportStudentSubmissionFailed(validationMessage);
             }
             catch (StudentViewServiceException studentViewServiceException)
             {
                 string validationMessage =
                     studentViewServiceException.Message;
 
-                this.StatusLabel.SetValue(validationMessage);
+                ReportStudentSubmissionFailed(validationMessage);
             }
         }
+
+        private void ReportStudentSubmissionSuccess()
+        {
+            this.StatusLabel.SetColor(Color.Green);
+            this.StatusLabel.SetValue("Submitted Successfully");
+        }
+
+        private void ReportStudentSubmissionFailed(string errorMessage)
+        {
+            this.StatusLabel.SetColor(Color.Red);
+            this.StatusLabel.SetValue(errorMessage);
+        }
+
     }
 }

@@ -101,9 +101,6 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.StatusLabel.Value
                 .Should().BeNull();
 
-            this.renderedStudentRegistrationComponent.Instance.StatusLabel.Color
-                .Should().Be(Color.Red);
-
             this.renderedStudentRegistrationComponent.Instance.Exception.Should().BeNull();
             this.studentViewServiceMock.VerifyNoOtherCalls();
         }
