@@ -46,6 +46,9 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
                 RenderComponent<StudentRegistrationComponent>();
 
             // then
+            this.renderedStudentRegistrationComponent.Instance.StudentView
+                .Should().NotBeNull();
+
             this.renderedStudentRegistrationComponent.Instance.State
                 .Should().Be(expectedComponentState);
 

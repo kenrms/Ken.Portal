@@ -26,5 +26,10 @@ namespace Ken.Portal.Web.Views.Components
         {
             this.State = ComponentState.Content;
         }
+
+        public void RegisterStudent()
+        {
+            var temp = this.StudentView;
+        }
     }
 }
