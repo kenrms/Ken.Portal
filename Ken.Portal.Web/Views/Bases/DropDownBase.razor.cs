@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System;
+using System.Threading.Tasks;
 
 namespace Ken.Portal.Web.Views.Bases
 {
@@ -6,5 +8,18 @@ namespace Ken.Portal.Web.Views.Bases
     {
         [Parameter]
         public TEnum Value { get; set; }
+
+        [Parameter]
+        public EventCallback<TEnum> ValueChanged { get; set; }
+
+        public void SetValue(TEnum value) =>
+            this.Value = value;
+
+        private Task OnValueChanged(ChangeEventArgs changeEventArgs)
+        {
+            this.Value = (TEnum)Enum.Parse(typeof(TEnum), changeEventArgs.Value.ToString());
+
+            return ValueChanged.InvokeAsync(this.Value);
+        }
     }
 }

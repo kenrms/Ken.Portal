@@ -33,6 +33,5 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
 
             return filler;
         }
-
     }
 }

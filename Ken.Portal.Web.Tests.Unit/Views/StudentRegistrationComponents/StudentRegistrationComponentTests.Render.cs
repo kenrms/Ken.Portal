@@ -2,6 +2,7 @@
 using Ken.Portal.Web.Models.ContainerComponents;
 using Ken.Portal.Web.Models.StudentViews;
 using Ken.Portal.Web.Views.Components;
+using Moq;
 using Xunit;
 
 namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
@@ -111,9 +112,47 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox
                 .SetValue(inputStudentView.IdentityNumber);
 
+            this.renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox
+                .SetValue(inputStudentView.FirstName);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox
+                .SetValue(inputStudentView.MiddleName);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox
+                .SetValue(inputStudentView.LastName);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown
+                .SetValue(inputStudentView.Gender);
+
+            this.renderedStudentRegistrationComponent.Instance.DateOfBirthPicker
+                .SetValue(inputStudentView.BirthDate);
+
+            this.renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
+
             // then
             this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.Value
                 .Should().BeEquivalentTo(expectedStudentView.IdentityNumber);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox.Value
+                .Should().BeEquivalentTo(expectedStudentView.FirstName);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox.Value
+                .Should().BeEquivalentTo(expectedStudentView.MiddleName);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.Value
+                .Should().BeEquivalentTo(expectedStudentView.LastName);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.Value
+                .Should().Be(expectedStudentView.Gender);
+
+            this.renderedStudentRegistrationComponent.Instance.DateOfBirthPicker.Value
+                .Should().Be(expectedStudentView.BirthDate);
+
+            this.studentViewServiceMock.Verify(service =>
+                service.AddStudentViewAsync(this.renderedStudentRegistrationComponent.Instance.StudentView),
+                    Times.Once);
+
+            this.studentViewServiceMock.VerifyNoOtherCalls();
         }
     }
 }
