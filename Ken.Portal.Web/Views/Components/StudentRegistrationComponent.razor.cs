@@ -1,5 +1,6 @@
 ﻿using Ken.Portal.Web.Models.ContainerComponents;
 using Ken.Portal.Web.Models.StudentViews;
+using Ken.Portal.Web.Models.StudentViews.Exceptions;
 using Ken.Portal.Web.Services.StudentViews;
 using Ken.Portal.Web.Views.Bases;
 using Microsoft.AspNetCore.Components;
@@ -29,7 +30,19 @@ namespace Ken.Portal.Web.Views.Components
             this.State = ComponentState.Content;
         }
 
-        public async void RegisterStudentAsync() =>
-            await this.StudentViewService.AddStudentViewAsync(this.StudentView);
+        public async void RegisterStudentAsync()
+        {
+            try
+            {
+                await this.StudentViewService.AddStudentViewAsync(this.StudentView);
+            }
+            catch (StudentViewValidationException studentViewValidationException)
+            {
+                string validationMessage =
+                    studentViewValidationException.InnerException.Message;
+
+                this.ErrorLabel.SetValue(validationMessage);
+            }
+        }
     }
 }
