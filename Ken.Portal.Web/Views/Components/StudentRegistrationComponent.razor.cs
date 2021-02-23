@@ -43,6 +43,13 @@ namespace Ken.Portal.Web.Views.Components
 
                 this.ErrorLabel.SetValue(validationMessage);
             }
+            catch (StudentViewDependencyValidationException studentViewDependencyValidationException)
+            {
+                string validationMessage =
+                    studentViewDependencyValidationException.InnerException.Message;
+
+                this.ErrorLabel.SetValue(validationMessage);
+            }
         }
     }
 }
