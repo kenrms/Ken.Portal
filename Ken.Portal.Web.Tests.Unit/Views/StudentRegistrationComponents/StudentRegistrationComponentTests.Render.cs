@@ -1,5 +1,6 @@
 ﻿using Bunit;
 using FluentAssertions;
+using Ken.Portal.Web.Models.Colors;
 using Ken.Portal.Web.Models.ContainerComponents;
 using Ken.Portal.Web.Models.StudentViews;
 using Ken.Portal.Web.Views.Components;
@@ -99,6 +100,9 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
 
             this.renderedStudentRegistrationComponent.Instance.ErrorLabel.Value
                 .Should().BeNull();
+
+            this.renderedStudentRegistrationComponent.Instance.ErrorLabel.Color
+                .Should().Be(Color.Red);
 
             this.renderedStudentRegistrationComponent.Instance.Exception.Should().BeNull();
             this.studentViewServiceMock.VerifyNoOtherCalls();

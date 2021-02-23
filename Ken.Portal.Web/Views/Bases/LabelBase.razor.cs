@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Ken.Portal.Web.Models.Colors;
+using Microsoft.AspNetCore.Components;
 
 namespace Ken.Portal.Web.Views.Bases
 {
@@ -6,6 +7,9 @@ namespace Ken.Portal.Web.Views.Bases
     {
         [Parameter]
         public string Value { get; set; }
+
+        [Parameter]
+        public Color Color { get; set; }
 
         public void SetValue(string value)
         {
