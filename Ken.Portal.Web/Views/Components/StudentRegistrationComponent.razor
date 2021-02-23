@@ -1,6 +1,7 @@
 ﻿@using Ken.Portal.Web.Views.Components.ContainerComponents;
 @using Ken.Portal.Web.Views.Bases;
 @using Ken.Portal.Web.Models.StudentViews;
+@using Ken.Portal.Web.Models.Colors;
 
 <ContainerComponent State="State">
     <Content>
@@ -32,7 +33,8 @@
                         OnClick="@RegisterStudentAsync"
                         Label="Submit Student" />
             <br />
-            <LabelBase @ref=ErrorLabel />
+            <LabelBase @ref=ErrorLabel 
+                       Color="Color.Red"/>
         </div>
     </Content>
 </ContainerComponent>
