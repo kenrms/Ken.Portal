@@ -79,6 +79,9 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.Value
                 .Should().BeOfType(typeof(StudentViewGender));
 
+            this.renderedStudentRegistrationComponent.Instance.DateOfBirthPicker
+                .Should().NotBeNull();
+
             this.renderedStudentRegistrationComponent.Instance.SubmitButton
                 .Should().NotBeNull();
 
