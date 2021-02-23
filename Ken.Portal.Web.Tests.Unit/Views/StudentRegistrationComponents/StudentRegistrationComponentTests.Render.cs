@@ -112,7 +112,7 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
                 .SetValue(inputStudentView.IdentityNumber);
 
             // then
-            this.renderedStudentRegistrationComponent.Instance.StudentView.IdentityNumber
+            this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.Value
                 .Should().BeEquivalentTo(expectedStudentView.IdentityNumber);
         }
     }
