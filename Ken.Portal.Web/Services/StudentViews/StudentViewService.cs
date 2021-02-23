@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Ken.Portal.Web.Services.StudentViews
 {
-    public class StudentViewService : IStudentViewService
+    public partial class StudentViewService : IStudentViewService
     {
         private readonly IStudentService studentService;
         private readonly IUserService userService;
@@ -28,13 +28,15 @@ namespace Ken.Portal.Web.Services.StudentViews
             this.loggingBroker = loggingBroker;
         }
 
-        public async ValueTask<StudentView> AddStudentViewAsync(StudentView studentView)
-        {
-            Student student = MapToStudent(studentView);
-            await this.studentService.RegisterStudentAsync(student);
+        public ValueTask<StudentView> AddStudentViewAsync(StudentView studentView) =>
+            TryCatch(async () =>
+            {
+                ValidateStudentView(studentView);
+                Student student = MapToStudent(studentView);
+                await this.studentService.RegisterStudentAsync(student);
 
-            return studentView;
-        }
+                return studentView;
+            });
 
         private Student MapToStudent(StudentView studentView)
         {
