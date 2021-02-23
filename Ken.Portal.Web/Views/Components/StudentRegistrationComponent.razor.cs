@@ -35,6 +35,7 @@ namespace Ken.Portal.Web.Views.Components
         {
             try
             {
+                ReportStudentSubmissionWaiting();
                 await this.StudentViewService.AddStudentViewAsync(this.StudentView);
                 ReportStudentSubmissionSuccess();
             }
@@ -66,6 +67,12 @@ namespace Ken.Portal.Web.Views.Components
 
                 ReportStudentSubmissionFailed(validationMessage);
             }
+        }
+
+        private void ReportStudentSubmissionWaiting()
+        {
+            this.StatusLabel.SetColor(Color.Black);
+            this.StatusLabel.SetValue("Submitting...");
         }
 
         private void ReportStudentSubmissionSuccess()
