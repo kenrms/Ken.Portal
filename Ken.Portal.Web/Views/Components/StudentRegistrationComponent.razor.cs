@@ -3,7 +3,6 @@ using Ken.Portal.Web.Models.StudentViews;
 using Ken.Portal.Web.Services.StudentViews;
 using Ken.Portal.Web.Views.Bases;
 using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
 
 namespace Ken.Portal.Web.Views.Components
 {
@@ -22,6 +21,7 @@ namespace Ken.Portal.Web.Views.Components
         public DropDownBase<StudentViewGender> StudentGenderDropDown { get; set; }
         public DatePickerBase DateOfBirthPicker { get; set; }
         public ButtonBase SubmitButton { get; set; }
+        public LabelBase ErrorLabel { get; set; }
 
         protected override void OnInitialized()
         {
