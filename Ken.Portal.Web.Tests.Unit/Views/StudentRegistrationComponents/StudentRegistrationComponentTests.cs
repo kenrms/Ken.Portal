@@ -1,11 +1,13 @@
 ﻿using Bunit;
 using Ken.Portal.Web.Models.StudentViews;
+using Ken.Portal.Web.Models.StudentViews.Exceptions;
 using Ken.Portal.Web.Services.StudentViews;
 using Ken.Portal.Web.Views.Components;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using System;
 using Tynamix.ObjectFiller;
+using Xunit;
 
 namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
 {
@@ -24,8 +26,22 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
         private static StudentView CreateRandomStudentView() =>
             CreateStudentFiller().Create();
 
-        private static string GetRandomString() => 
+        private static string GetRandomString() =>
             new MnemonicString().GetValue();
+
+        public  static TheoryData StudentViewValidationExceptions()
+        {
+            string randomMessage = GetRandomString();
+            string validationMessage = GetRandomString();
+            string expectedErrorMessage = validationMessage;
+            var innerValidationException = new Exception(validationMessage);
+
+            return new TheoryData<Exception>
+            {
+                new StudentViewValidationException(innerValidationException),
+                new StudentViewDependencyValidationException(innerValidationException),
+            };
+        }
 
         private static Filler<StudentView> CreateStudentFiller()
         {

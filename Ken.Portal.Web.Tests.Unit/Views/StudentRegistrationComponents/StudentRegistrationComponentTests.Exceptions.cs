@@ -1,7 +1,6 @@
 ﻿using Bunit;
 using FluentAssertions;
 using Ken.Portal.Web.Models.StudentViews;
-using Ken.Portal.Web.Models.StudentViews.Exceptions;
 using Ken.Portal.Web.Views.Components;
 using Moq;
 using System;
@@ -11,17 +10,14 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
 {
     public partial class StudentRegistrationComponentTests : TestContext
     {
-        [Fact]
-        public void ShouldRenderInnerExceptionMessageIfValidationErrorOccured()
+        [Theory]
+        [MemberData(nameof(StudentViewValidationExceptions))]
+        public void ShouldRenderInnerExceptionMessageIfValidationErrorOccured(
+            Exception studentViewValidationException)
         {
             // given
-            string randomMessage = GetRandomString();
-            string validationMessage = GetRandomString();
-            string expectedErrorMessage = validationMessage;
-            var innerValidationException = new Exception(validationMessage);
-
-            var studentViewValidationException =
-                new StudentViewValidationException(innerValidationException);
+            string expectedErrorMessage =
+                studentViewValidationException.InnerException.Message;
 
             this.studentViewServiceMock.Setup(service =>
                 service.AddStudentViewAsync(It.IsAny<StudentView>()))
