@@ -3,6 +3,7 @@ using Ken.Portal.Web.Models.StudentViews;
 using Ken.Portal.Web.Services.StudentViews;
 using Ken.Portal.Web.Views.Bases;
 using Microsoft.AspNetCore.Components;
+using System.Threading.Tasks;
 
 namespace Ken.Portal.Web.Views.Components
 {
@@ -27,5 +28,8 @@ namespace Ken.Portal.Web.Views.Components
             this.StudentView = new StudentView();
             this.State = ComponentState.Content;
         }
+
+        public async void RegisterStudentAsync() =>
+            await this.StudentViewService.AddStudentViewAsync(this.StudentView);
     }
 }
