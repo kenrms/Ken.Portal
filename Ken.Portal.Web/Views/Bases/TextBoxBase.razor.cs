@@ -9,5 +9,8 @@ namespace Ken.Portal.Web.Views.Bases
 
         [Parameter]
         public string Placeholder { get; set; }
+
+        public void SetValue(string value) =>
+            this.Value = value;
     }
 }

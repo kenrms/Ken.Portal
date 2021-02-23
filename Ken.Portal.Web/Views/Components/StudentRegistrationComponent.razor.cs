@@ -19,6 +19,7 @@ namespace Ken.Portal.Web.Views.Components
         public TextBoxBase StudentMiddleNameTextBox { get; set; }
         public TextBoxBase StudentLastNameTextBox { get; set; }
         public DropDownBase<StudentViewGender> StudentGenderDropDown { get; set; }
+        public DatePickerBase DateOfBirthPicker { get; set; }
         public ButtonBase SubmitButton { get; set; }
 
         protected override void OnInitialized()
