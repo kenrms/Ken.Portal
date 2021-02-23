@@ -12,6 +12,9 @@ namespace Ken.Portal.Web.Views.Bases
         public string Placeholder { get; set; }
 
         [Parameter]
+        public bool IsDisabled { get; set; }
+
+        [Parameter]
         public EventCallback<string> ValueChanged { get; set; }
 
         public void SetValue(string value) =>
@@ -23,5 +26,9 @@ namespace Ken.Portal.Web.Views.Bases
 
             return ValueChanged.InvokeAsync(this.Value);
         }
+
+        public void Disable() => this.IsDisabled = true;
+
+        public void Enable() => this.IsDisabled = false;
     }
 }

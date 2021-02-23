@@ -12,6 +12,9 @@ namespace Ken.Portal.Web.Views.Bases
         [Parameter]
         public EventCallback<DateTimeOffset> ValueChanged { get; set; }
 
+        [Parameter]
+        public bool IsDisabled { get; set; }
+
         public void SetValue(DateTimeOffset value) =>
             this.Value = value;
 
@@ -21,5 +24,9 @@ namespace Ken.Portal.Web.Views.Bases
 
             return ValueChanged.InvokeAsync(this.Value);
         }
+
+        public void Disable() => this.IsDisabled = true;
+
+        public void Enable() => this.IsDisabled = false;
     }
 }

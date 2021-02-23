@@ -1,6 +1,7 @@
 ﻿@typeparam TEnum
 
-<select @oninput="OnValueChanged">
+<select @oninput="OnValueChanged"
+        disabled="@IsDisabled">
     @{ 
         foreach(TEnum enumValue in Enum.GetValues(typeof(TEnum)))
         {
