@@ -1,1 +1,3 @@
-﻿<input type="text" placeholder="@Placeholder" @bind-value="Value"/>
+﻿<input @bind-value="Value"
+       @oninput="@OnValueChanged"
+       placeholder="@Placeholder " />

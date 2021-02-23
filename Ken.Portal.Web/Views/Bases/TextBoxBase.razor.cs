@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System.Threading.Tasks;
 
 namespace Ken.Portal.Web.Views.Bases
 {
@@ -10,7 +11,17 @@ namespace Ken.Portal.Web.Views.Bases
         [Parameter]
         public string Placeholder { get; set; }
 
+        [Parameter]
+        public EventCallback<string> ValueChanged { get; set; }
+
         public void SetValue(string value) =>
             this.Value = value;
+
+        private Task OnValueChanged(ChangeEventArgs changeEventArgs)
+        {
+            this.Value = changeEventArgs.Value.ToString();
+
+            return ValueChanged.InvokeAsync(this.Value);
+        }
     }
 }
