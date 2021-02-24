@@ -152,6 +152,28 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.StatusLabel.Color
                 .Should().Be(Color.Black);
 
+            this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.IsDisabled
+                .Should().BeTrue();
+
+            this.renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox.IsDisabled
+                .Should().BeTrue();
+
+            this.renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox.IsDisabled
+                .Should().BeTrue();
+
+            this.renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.IsDisabled
+                .Should().BeTrue();
+
+            this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.IsDisabled
+                .Should().BeTrue();
+
+            this.renderedStudentRegistrationComponent.Instance.DateOfBirthPicker.IsDisabled
+                .Should().BeTrue();
+
+            this.renderedStudentRegistrationComponent.Instance.SubmitButton.IsDisabled
+                .Should().BeTrue();
+
+
             this.studentViewServiceMock.Verify(service =>
                 service.AddStudentViewAsync(It.IsAny<StudentView>()),
                     Times.Once);
