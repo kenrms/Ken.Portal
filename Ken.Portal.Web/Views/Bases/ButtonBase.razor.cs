@@ -16,8 +16,16 @@ namespace Ken.Portal.Web.Views.Bases
 
         public void Click() => OnClick.Invoke();
 
-        public void Disable() => this.IsDisabled = true;
+        public void Disable()
+        {
+            this.IsDisabled = true;
+            InvokeAsync(StateHasChanged);
+        }
 
-        public void Enable() => this.IsDisabled = false;
+        public void Enable()
+        {
+            this.IsDisabled = false;
+            InvokeAsync(StateHasChanged);
+        }
     }
 }
