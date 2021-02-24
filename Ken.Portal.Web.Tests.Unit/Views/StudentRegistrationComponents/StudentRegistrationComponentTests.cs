@@ -32,8 +32,7 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
         public static TheoryData StudentViewValidationExceptions()
         {
             string randomMessage = GetRandomString();
-            string validationMessage = GetRandomString();
-            string expectedErrorMessage = validationMessage;
+            string validationMessage = randomMessage;
             var innerValidationException = new Exception(validationMessage);
 
             return new TheoryData<Exception>
