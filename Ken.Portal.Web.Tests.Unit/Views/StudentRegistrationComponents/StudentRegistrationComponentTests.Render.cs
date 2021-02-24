@@ -128,7 +128,7 @@ namespace Ken.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
         }
 
         [Fact]
-        public void ShouldDisplaySubmittingStatusBeforeStudentIsSubmittedSuccessfully()
+        public void ShouldDisplaySubmittingStatusAndDisableControlsBeforeStudentIsSubmittedCompletes()
         {
             // given
             StudentView someStudentView = CreateRandomStudentView();
